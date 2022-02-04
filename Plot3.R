@@ -31,5 +31,5 @@ with(t, {
       c("Sub_metering_1", "Sub_metering_2", "Sub_metering_3"))
       
 # for saving the plot with specifict size
-dev.copy(png, "plot1.png", width=480, height=480)
+dev.copy(png, "plot3.png", width=480, height=480)
 dev.off()

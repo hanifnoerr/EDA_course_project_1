@@ -38,5 +38,5 @@ with(t, {
 })
 
 # for saving the plot with specifict size
-# dev.copy(png, "plot1.png", width=480, height=480)
-# dev.off()
+dev.copy(png, "plot4.png", width=480, height=480)
+dev.off()

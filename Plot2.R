@@ -1,0 +1,28 @@
+# read DF
+t <- read.table("household_power_consumption.txt", header=TRUE, sep=";", na.strings = "?", colClasses = c('character','character','numeric','numeric','numeric','numeric','numeric','numeric','numeric'))
+
+# Data cleansing
+## Format date 
+t$Date <- as.Date(t$Date, "%d/%m/%Y")
+  
+## Filter data set from 1/2/2007 - 2/2/2007
+t <- subset(t,Date >= as.Date("2007-2-1") & Date <= as.Date("2007-2-2"))
+  
+## Remove the incomplete 
+t <- t[complete.cases(t),]
+
+## Combine Date and Time 
+dateTime <- paste(t$Date, t$Time)
+dateTime <- setNames(dateTime, "DateTime")
+t <- t[ ,!(names(t) %in% c("Date","Time"))]
+t <- cbind(dateTime, t)
+  
+## Format dateTime 
+t$dateTime <- as.POSIXct(dateTime)
+
+# Creating Plot 2
+plot(t$Global_active_power~t$dateTime, type="l", ylab="Global Active Power (kilowatts)", xlab="")
+ 
+# for saving the plot with specifict size
+dev.copy(png, "plot1.png", width=480, height=480)
+dev.off()
